@@ -1,59 +1,111 @@
 import React from "react";
+import {
+  Facebook,
+  Instagram,
+  Linkedin,
+  Youtube,
+  X,
+  Phone,
+  Mail,
+} from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#1a2230] text-[#dbe5eb] pt-16 pb-8" id="contact">
-      <div className="max-w-[1200px] mx-auto px-6 grid gap-10 md:grid-cols-2 lg:grid-cols-4">
-        {/* Brand */}
-        <div className="flex gap-4 items-start">
-          <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#12c99b] to-[#ff7676] grid place-items-center text-2xl font-bold text-white">
-            +
+    <footer className="bg-[#222] text-[#dbe5eb] pt-10 pb-4" id="contact">
+      <div className="max-w-6xl mx-auto px-4 grid gap-6 md:grid-cols-[auto_1fr]">
+        {/* Left: Brand & Social */}
+        <div className="bg-[#333] rounded-md p-6 flex flex-col items-start gap-6 w-auto max-w-fit">
+          {/* Brand Logo */}
+          <div className="mb-4">
+            <img
+              src="/logo.png"
+              alt="WekeyarPlus Logo"
+              className="h-12 w-auto rounded-xl"
+            />
           </div>
-          <div>
-            <h3 className="font-bold text-lg mb-3 text-white">
-              Wekeyar Pharmacy
-            </h3>
-            <p className="text-[#a6b6c2] mb-2">
-              Delivering trusted care & quality medicines since 1995.
+          {/* Social Icons */}
+          <div className="flex gap-4 mb-4">
+            <a
+              href="#"
+              className="border border-[#dbe5eb] rounded-md p-2 hover:bg-[#222]"
+            >
+              <Facebook size={22} />
+            </a>
+            <a
+              href="#"
+              className="border border-[#dbe5eb] rounded-md p-2 hover:bg-[#222]"
+            >
+              <Instagram size={22} />
+            </a>
+            <a
+              href="#"
+              className="border border-[#dbe5eb] rounded-md p-2 hover:bg-[#222]"
+            >
+              <Linkedin size={22} />
+            </a>
+            <a
+              href="#"
+              className="border border-[#dbe5eb] rounded-md p-2 hover:bg-[#222]"
+            >
+              <Youtube size={22} />
+            </a>
+            <a
+              href="#"
+              className="border border-[#dbe5eb] rounded-md p-2 hover:bg-[#222]"
+            >
+              <X size={22} />
+            </a>
+          </div>
+          {/* Contact Info */}
+          <div className="flex items-center gap-3 mb-2">
+            <span className="bg-[#00d26a] rounded-md p-2 text-white">
+              <Phone size={22} />
+            </span>
+            <span className="text-lg text-[#dbe5eb]">72059 59340</span>
+          </div>
+          <div className="flex items-center gap-3">
+            <span className="bg-[#00d26a] rounded-md p-2 text-white">
+              <Mail size={22} />
+            </span>
+            <span className="text-lg text-[#dbe5eb]">
+              wekeyarplus@gmail.com
+            </span>
+          </div>
+        </div>
+        {/* Right: About & Presence */}
+        <div className="flex flex-col justify-between py-2">
+          <div className="mb-6">
+            <h3 className="text-xl font-semibold mb-2 text-white">About Us</h3>
+            <p className="text-[#b0b8c1]">
+              Buy medicines online from WeKeyar Plus Pharmacy at great discounts
+              and get home delivery of medicines without any hassles.
             </p>
           </div>
-        </div>
-        {/* Visit Us */}
-        <div>
-          <h4 className="font-bold mb-3 text-white">Visit Us</h4>
-          <p className="text-[#a6b6c2] mb-2">
-            123 Health Avenue, Wellness City
-          </p>
-          <p className="text-[#a6b6c2] mb-2">Open Daily 8:00 AM – 10:00 PM</p>
-        </div>
-        {/* Contact */}
-        <div>
-          <h4 className="font-bold mb-3 text-white">Contact</h4>
-          <p className="text-[#a6b6c2] mb-2">Phone: +91-9876543210</p>
-          <p className="text-[#a6b6c2] mb-2">Email: care@wekeyar.com</p>
-        </div>
-        {/* Stay Updated */}
-        <div>
-          <h4 className="font-bold mb-3 text-white">Stay Updated</h4>
-          <form className="flex gap-2 flex-wrap">
-            <input
-              type="email"
-              placeholder="Enter your email"
-              required
-              className="flex-1 min-w-[180px] px-4 py-3 rounded-full border-none outline-none text-[#1a2230]"
-            />
-            <button
-              type="submit"
-              className="bg-[#12c99b] text-white px-6 py-3 rounded-full font-semibold hover:bg-[#0fa987] transition-colors"
-            >
-              Subscribe
-            </button>
-          </form>
+          <div>
+            <h3 className="text-xl font-semibold mb-2 text-white">
+              Our Presence
+            </h3>
+            <div className="flex flex-wrap gap-x-4 gap-y-2 text-[#b0b8c1]">
+              <span>IRC Village</span>
+              <span>Chandrasekharpur</span>
+              <span>Dumduma</span>
+              <span>GGP Colony</span>
+              <span>Kalinga Vihar</span>
+              <span>Mausima Square</span>
+              <span>Sum Hospital</span>
+              <span>VSS Nagar</span>
+              <span>Samantrapur</span>
+            </div>
+          </div>
         </div>
       </div>
-      <p className="mt-12 text-center text-sm text-[#7f93a2]">
-        © {new Date().getFullYear()} Wekeyar Pharmacy. All rights reserved.
-      </p>
+      <div className="border-t border-[#333] mt-8 pt-4">
+        <p className="text-center text-sm text-[#7f93a2]">
+          © {new Date().getFullYear()}{" "}
+          <span className="text-[#00d26a] font-semibold">WeKeyarPlus</span> .
+          All Right Reserved.
+        </p>
+      </div>
     </footer>
   );
 }
