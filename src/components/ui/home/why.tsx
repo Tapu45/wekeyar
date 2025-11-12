@@ -67,7 +67,7 @@ const Why = () => {
   return (
     <section className="relative py-10 px-4 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
       {/* Decorative curved top border */}
-      <div className="absolute top-0 left-0 w-full h-24 bg-white -z-10">
+      <div className="absolute top-0 left-0 w-full h-24 bg-white">
         <svg
           viewBox="0 0 1440 120"
           fill="none"
@@ -82,18 +82,38 @@ const Why = () => {
         </svg>
       </div>
 
-      <div className="max-w-7xl mx-auto relative z-10">
-        <div className="text-center mb-10">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 tracking-tight">
-            Why WeKeyarPlus Pharmacy?
+      <div className="max-w-7xl mx-auto relative z-10 py-8">
+        <div className="text-center mb-6">
+          <h2 className="text-5xl md:text-6xl font-black text-gray-900 mb-4 tracking-tight">
+            Why <span className="text-red-600 drop-shadow-lg">WeKeyar</span>
+            <span className="blinking-plus drop-shadow-lg">Plus</span> Pharmacy?
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Buy prescribed medicines ranging from generic medicines to OTC
             products & much more at most affordable price and get delivered at
             home.
           </p>
+          <style>
+            {`
+      .blinking-plus {
+        animation: blink-green 1.5s infinite;
+        font-weight: 900;
+        font-size: 1.1em;
+        letter-spacing: 0.05em;
+      }
+      @keyframes blink-green {
+        0%, 100% { 
+          color: #16a34a;
+          text-shadow: 0 0 10px rgba(34, 197, 94, 0.6);
+        }
+        50% { 
+          color: #86efac;
+          text-shadow: 0 0 20px rgba(168, 249, 184, 0.8);
+        }
+      }
+    `}
+          </style>
         </div>
-
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {features.map((feature, index) => (
             <div
