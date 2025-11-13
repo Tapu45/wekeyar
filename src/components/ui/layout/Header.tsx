@@ -88,11 +88,13 @@ export default function Header() {
                   >
                     {link.label}
                     <span
-                      className={`absolute bottom-0 left-4 right-4 h-0.5 bg-[#e63946] rounded-full transition-transform duration-300 origin-left ${
-                        isActive(link.href)
-                          ? "scale-x-100"
-                          : "scale-x-0 group-hover:scale-x-100"
-                      }`}
+                      className={`absolute bottom-0 left-4 right-4 h-0.5 rounded-full transition-transform duration-300 origin-left
+    ${
+      isActive(link.href)
+        ? "bg-[#e63946] scale-x-100"
+        : "bg-[#12c99b] scale-x-0 group-hover:scale-x-100"
+    }
+  `}
                     />
                   </a>
                 </li>

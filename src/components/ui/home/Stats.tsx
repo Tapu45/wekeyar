@@ -52,8 +52,10 @@ const stats = [
 const Stats = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [countedValues, setCountedValues] = useState(stats.map(() => 0));
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
 
+  // Animate all counters on initial load
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -77,42 +79,60 @@ const Stats = () => {
     };
   }, []);
 
+  // Counter animation for all stats on initial load
   useEffect(() => {
     if (!isVisible) return;
 
-    const duration = 2000; // 2 seconds
+    stats.forEach((stat, index) => {
+      animateCounter(index, stat.value);
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isVisible]);
+
+  // Counter animation for hovered stat
+  useEffect(() => {
+    if (hoveredIndex === null) return;
+    animateCounter(hoveredIndex, stats[hoveredIndex].value);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hoveredIndex]);
+
+  // Counter animation function
+  const animateCounter = (index: number, targetValue: number) => {
+    const duration = 2000;
     const steps = 60;
     const stepDuration = duration / steps;
+    let currentStep = 0;
+    const increment = targetValue / steps;
+    const hasDecimal = targetValue % 1 !== 0;
 
-    stats.forEach((stat, index) => {
-      let currentStep = 0;
-      const increment = stat.value / steps;
-      const hasDecimal = stat.value % 1 !== 0;
+    setCountedValues((prev) => {
+      const updated = [...prev];
+      updated[index] = 0;
+      return updated;
+    });
 
-      const timer = setInterval(() => {
-        currentStep++;
-        const newValue = Math.min(
-          Math.floor(increment * currentStep),
-          stat.value
-        );
+    const timer = setInterval(() => {
+      currentStep++;
+      const newValue = Math.min(
+        Math.floor(increment * currentStep),
+        targetValue
+      );
+      setCountedValues((prev) => {
+        const updated = [...prev];
+        updated[index] = hasDecimal ? newValue : newValue;
+        return updated;
+      });
 
+      if (currentStep >= steps) {
         setCountedValues((prev) => {
           const updated = [...prev];
-          updated[index] = hasDecimal ? newValue : newValue;
+          updated[index] = targetValue;
           return updated;
         });
-
-        if (currentStep >= steps) {
-          setCountedValues((prev) => {
-            const updated = [...prev];
-            updated[index] = stat.value;
-            return updated;
-          });
-          clearInterval(timer);
-        }
-      }, stepDuration);
-    });
-  }, [isVisible]);
+        clearInterval(timer);
+      }
+    }, stepDuration);
+  };
 
   const formatNumber = (num: number): string => {
     if (num >= 1000000) {
@@ -178,15 +198,10 @@ const Stats = () => {
           {stats.map((stat, index) => (
             <div
               key={stat.id}
-              className="group relative rounded-3xl  hover:shadow-2xl transition-all duration-500 overflow-hidden  hover:border-gray-200 transform hover:-translate-y-2"
+              className="group relative rounded-3xl transition-all duration-500 overflow-hidden"
+              onMouseEnter={() => setHoveredIndex(index)}
+              onMouseLeave={() => setHoveredIndex(null)}
             >
-              {/* Gradient Border on Hover */}
-              <div
-                className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-3xl`}
-              ></div>
-
-             
-
               {/* Decorative Corner Pattern */}
               <div className="absolute top-0 right-0 w-32 h-32 opacity-5">
                 <svg viewBox="0 0 100 100" className="w-full h-full">
@@ -213,7 +228,15 @@ const Stats = () => {
               <div className="relative z-10 p-8 text-center">
                 {/* Icon */}
                 <div
-                  className={`mb-6 flex items-center justify-center w-20 h-20 mx-auto rounded-2xl ${stat.bgColor} border-2 ${stat.borderColor} group-hover:scale-110 transition-transform duration-500 shadow-md`}
+                  className={`mb-6 flex items-center justify-center w-20 h-20 mx-auto rounded-2xl border-2 ${
+                    stat.borderColor
+                  } shadow-md transition-all duration-500
+                    ${
+                      hoveredIndex === index
+                        ? `bg-gradient-to-br ${stat.color} scale-110 text-white`
+                        : `${stat.bgColor} scale-100`
+                    }
+                  `}
                 >
                   <span className="text-4xl">{stat.icon}</span>
                 </div>
@@ -235,19 +258,10 @@ const Stats = () => {
                 <p className="text-sm text-gray-600 leading-relaxed">
                   {stat.description}
                 </p>
-
-             
-              </div>
-
-              {/* Shine Effect */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-500">
-                <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent"></div>
               </div>
             </div>
           ))}
         </div>
-
-     
       </div>
 
       <style jsx>{`
