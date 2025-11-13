@@ -59,15 +59,15 @@ export default function Header() {
                   <a
                     href={link.href}
                     onClick={() => setActiveLink(link.href)}
-                    className={`px-4 py-2.5 rounded-lg font-bold text-lg text-black transition-all duration-300 relative group ${
+                    className={`px-4 py-2.5 rounded-lg font-bold text-lg transition-all duration-300 relative group ${
                       activeLink === link.href
-                        ? "text-[#e63946] underline underline-offset-8"
+                        ? "text-[#e63946]"
                         : "text-gray-700 hover:text-[#12c99b]"
                     }`}
                   >
                     {link.label}
                     <span
-                      className={`absolute bottom-0 left-4 right-4 h-0.5 bg-gradient-to-r from-[#12c99b] to-[#12c99b] rounded-full transition-transform duration-300 origin-left ${
+                      className={`absolute bottom-0 left-4 right-4 h-0.5 bg-[#e63946] rounded-full transition-transform duration-300 origin-left ${
                         activeLink === link.href
                           ? "scale-x-100"
                           : "scale-x-0 group-hover:scale-x-100"
@@ -145,13 +145,13 @@ export default function Header() {
                   }}
                   className={`block px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300 relative group ${
                     activeLink === link.href
-                      ? "text-[#e63946] underline underline-offset-8"
+                      ? "text-[#e63946]"
                       : "text-gray-700 hover:text-[#12c99b]"
                   }`}
                 >
                   {link.label}
                   <span
-                    className={`absolute bottom-0 left-6 right-6 h-0.5 bg-gradient-to-r from-[#12c99b] to-[#12c99b] rounded-full transition-transform duration-300 origin-left ${
+                    className={`absolute bottom-0 left-6 right-6 h-0.5 bg-[#e63946] rounded-full transition-transform duration-300 origin-left ${
                       activeLink === link.href
                         ? "scale-x-100"
                         : "scale-x-0 group-hover:scale-x-100"

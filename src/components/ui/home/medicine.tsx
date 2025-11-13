@@ -36,7 +36,10 @@ export default function Medicine() {
       <div className="max-w-[1200px] mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-8">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <span className="text-sm font-bold text-[#e63946] uppercase tracking-widest">
+            Easy Ordering Process
+          </span>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-2 py-4">
             Your Health, Our Priority
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed italic">
