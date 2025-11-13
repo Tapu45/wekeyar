@@ -127,7 +127,7 @@ const Stats = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative py-20 px-4 bg-gradient-to-b from-gray-50 via-white to-gray-50 overflow-hidden"
+      className="relative py-6 px-4 bg-gradient-to-b from-gray-50 via-white to-gray-50 overflow-hidden"
     >
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -157,9 +157,9 @@ const Stats = () => {
         </svg>
       </div>
 
-      <div className="max-w-7xl mx-auto relative z-10">
+      <div className="max-w-8xl mx-auto relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-3">
           <span className="text-sm font-bold text-[#e63946] uppercase tracking-widest mb-4 inline-block">
             Our Achievements
           </span>
@@ -178,17 +178,14 @@ const Stats = () => {
           {stats.map((stat, index) => (
             <div
               key={stat.id}
-              className="group relative bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden border-2 border-gray-100 hover:border-gray-200 transform hover:-translate-y-2"
+              className="group relative rounded-3xl  hover:shadow-2xl transition-all duration-500 overflow-hidden  hover:border-gray-200 transform hover:-translate-y-2"
             >
               {/* Gradient Border on Hover */}
               <div
                 className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-3xl`}
               ></div>
 
-              {/* Top Accent Line */}
-              <div
-                className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${stat.color}`}
-              ></div>
+             
 
               {/* Decorative Corner Pattern */}
               <div className="absolute top-0 right-0 w-32 h-32 opacity-5">
@@ -239,15 +236,7 @@ const Stats = () => {
                   {stat.description}
                 </p>
 
-                {/* Progress Bar */}
-                <div className="mt-6 h-1 bg-gray-100 rounded-full overflow-hidden">
-                  <div
-                    className={`h-full bg-gradient-to-r ${stat.color} transition-all duration-2000 ease-out`}
-                    style={{
-                      width: isVisible ? "100%" : "0%",
-                    }}
-                  ></div>
-                </div>
+             
               </div>
 
               {/* Shine Effect */}
@@ -258,16 +247,7 @@ const Stats = () => {
           ))}
         </div>
 
-        {/* Bottom Decorative Element */}
-        <div className="mt-16 text-center">
-          <div className="inline-flex items-center gap-4 px-8 py-4 bg-white/80 backdrop-blur-sm rounded-full shadow-lg border border-gray-200">
-            <span className="text-2xl">✨</span>
-            <p className="text-lg font-semibold text-gray-700">
-              Growing stronger every day
-            </p>
-            <span className="text-2xl">✨</span>
-          </div>
-        </div>
+     
       </div>
 
       <style jsx>{`
