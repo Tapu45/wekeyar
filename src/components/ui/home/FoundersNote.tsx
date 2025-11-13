@@ -5,6 +5,16 @@ import React from "react";
 const FoundersNote = () => {
   return (
     <section className="relative py-6 md:py-6 bg-white overflow-hidden">
+      <div
+        className="absolute inset-0 z-0 pointer-events-none"
+        style={{
+          backgroundImage:
+            "url('https://www.transparenttextures.com/patterns/noise.png')",
+          opacity: 0.68,
+          mixBlendMode: "multiply",
+        }}
+        aria-hidden="true"
+      ></div>
       {/* Subtle Decorative Background */}
       <div className="absolute inset-0 opacity-30 pointer-events-none">
         <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-red-50 to-transparent rounded-full blur-3xl"></div>
@@ -391,8 +401,6 @@ const FoundersNote = () => {
             </div>
           </div>
         </div>
-
-       
       </div>
     </section>
   );

@@ -67,7 +67,7 @@ const Why = () => {
   return (
     <section className="relative py-10 px-4 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
       {/* Decorative curved top border */}
-      <div className="absolute top-0 left-0 w-full h-24 bg-white">
+      {/* <div className="absolute top-0 left-0 w-full h-24 bg-white">
         <svg
           viewBox="0 0 1440 120"
           fill="none"
@@ -80,7 +80,7 @@ const Why = () => {
             fill="#F9FAFB"
           />
         </svg>
-      </div>
+      </div> */}
 
       <div className="max-w-7xl mx-auto relative z-10 py-8">
         <div className="text-center mb-6">

@@ -1,38 +1,56 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 const navLinks = [
-  { label: "Home", href: "#hero" },
-  { label: "About", href: "#about" },
-  { label: "Medicine", href: "#medicines" },
-  { label: "Why we", href: "#why-we" },
-  { label: "Contact", href: "#contact" },
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
+  { label: "Medicine", href: "/#medicines" },
+  { label: "Why we", href: "/#why-we" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeLink, setActiveLink] = useState("");
+  const pathname = usePathname();
 
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = navLinks.map((link) => link.href.substring(1));
-      let current = "";
+    // Set active link based on current pathname
+    const currentPath = pathname || "/";
+    if (currentPath === "/") {
+      // Handle scroll-based navigation on home page
+      const handleScroll = () => {
+        const sections = ["hero", "medicines", "why-we", "contact"];
+        let current = "";
 
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element && element.getBoundingClientRect().top <= 100) {
-          current = `#${section}`;
+        for (const section of sections) {
+          const element = document.getElementById(section);
+          if (element && element.getBoundingClientRect().top <= 100) {
+            current = `#${section}`;
+          }
         }
-      }
-      setActiveLink(current);
-    };
+        setActiveLink(current || "/");
+      };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+      window.addEventListener("scroll", handleScroll);
+      handleScroll(); // Initial check
+      return () => window.removeEventListener("scroll", handleScroll);
+    } else {
+      // For other pages, set active based on pathname
+      setActiveLink(currentPath);
+    }
+  }, [pathname]);
 
   const handleLinkClick = () => {
     setIsMenuOpen(false);
+  };
+
+  const isActive = (href: string) => {
+    if (href.startsWith("#")) {
+      return activeLink === href;
+    }
+    return activeLink === href || (href === "/" && pathname === "/");
   };
 
   return (
@@ -58,9 +76,12 @@ export default function Header() {
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    onClick={() => setActiveLink(link.href)}
+                    onClick={() => {
+                      setActiveLink(link.href);
+                      handleLinkClick();
+                    }}
                     className={`px-4 py-2.5 rounded-lg font-bold text-lg transition-all duration-300 relative group ${
-                      activeLink === link.href
+                      isActive(link.href)
                         ? "text-[#e63946]"
                         : "text-gray-700 hover:text-[#12c99b]"
                     }`}
@@ -68,7 +89,7 @@ export default function Header() {
                     {link.label}
                     <span
                       className={`absolute bottom-0 left-4 right-4 h-0.5 bg-[#e63946] rounded-full transition-transform duration-300 origin-left ${
-                        activeLink === link.href
+                        isActive(link.href)
                           ? "scale-x-100"
                           : "scale-x-0 group-hover:scale-x-100"
                       }`}
@@ -144,7 +165,7 @@ export default function Header() {
                     handleLinkClick();
                   }}
                   className={`block px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300 relative group ${
-                    activeLink === link.href
+                    isActive(link.href)
                       ? "text-[#e63946]"
                       : "text-gray-700 hover:text-[#12c99b]"
                   }`}
@@ -152,7 +173,7 @@ export default function Header() {
                   {link.label}
                   <span
                     className={`absolute bottom-0 left-6 right-6 h-0.5 bg-[#e63946] rounded-full transition-transform duration-300 origin-left ${
-                      activeLink === link.href
+                      isActive(link.href)
                         ? "scale-x-100"
                         : "scale-x-0 group-hover:scale-x-100"
                     }`}
